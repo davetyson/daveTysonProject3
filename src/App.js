@@ -1,5 +1,4 @@
 import './App.css';
-import { useState } from 'react';
 import CardGame from './components/CardGame';
 
 function App() {
