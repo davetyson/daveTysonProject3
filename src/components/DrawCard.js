@@ -39,6 +39,10 @@ const DrawCard = (props) => {
             console.log(twoCards.data.cards);
         }) 
     }, [drawCount])
+    
+    // I'm not quite sure how to adjust the card presentations so that one says user card and one says computer card. I will do one of two things:
+        // Figure out how to make a ternary statement that basically says if card 1, print "User card", else print "Computer card". That could either go here somewhere or in the UserCard, I'm not sure how it works yet
+        // I could potentially get this done with CSS by just including the blocks inside of a larger frame in the DrawCard or CardGame modules and move the headings to an overview category that isn't generating the fresh images
 
     return (
         <div>
