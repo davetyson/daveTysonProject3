@@ -8,11 +8,24 @@ import ComputerMsg from "./ComputerMsg";
 
 const DrawCard = (props) => {
 
+    let [ twoCards, setTwoCards ] = useState([]);
+
+    let [ drawCount, setDrawCount ] = useState(1);
+
     console.log(props.deckId);
     const deckUrl = 'https://deckofcardsapi.com/api/deck/' + props.deckId + '/draw/';
     console.log(deckUrl);
 
-    const [ twoCards, setTwoCards ] = useState([]);
+
+    const handleClick = () => {
+        setDrawCount(drawCount++);
+        console.log(drawCount);
+        // some kind of logic here eventually for if the draw count reaches 26, start a new deck
+        // Basically, if drawCount === 26 then
+            // set some kind of drawReset variable to true which would trigger the reshuffle in CardGame
+            // reset drawCount to 1
+            // reset drawReset to false
+    };
 
     useEffect( () => {
 
@@ -25,7 +38,7 @@ const DrawCard = (props) => {
             setTwoCards(twoCards.data.cards);
             console.log(twoCards.data.cards);
         }) 
-    }, [props.deckId])
+    }, [drawCount])
 
     return (
         <div>
@@ -35,6 +48,9 @@ const DrawCard = (props) => {
                     <UserCard key={card.code} photoUrl={card.image} altText={card.value + " of " + card.suit} value={card.value} />
                 )
              })}
+
+            {/* Still need to figure out why I have to click this button twice to get the draw to run. it seems to update the state variable that I need to trigger the useEffect each time, but it only actually updates the cards on every second click */}
+            <button onClick={handleClick}>Click me to draw cards</button>
             <ComputerMsg twoCards={twoCards}/>
 
         </div>

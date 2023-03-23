@@ -26,6 +26,7 @@ const CardGame = () => {
             pullNewDeck(apiData.data.deck_id);
         })
 
+        // will likely need to put something to trigger this call again in dependency array, when the deck count has reached max and needs a shuffle
     }, [])
 
     return (
