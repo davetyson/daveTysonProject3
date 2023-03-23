@@ -7,6 +7,12 @@ const ComputerMsg = (props) => {
     console.log(props.twoCards[1]);
 
     useEffect(() => {
+    
+    // Most recent thoughts on changing 10-ace values
+        // Pull the object data and make it into a proper js array outside of the useEffect
+        // say if array line x value = given card, update array line with number value
+        // Basically the below plan, but convert your array-like object into a proper array first
+
 
     // Tried this thing
     //         const checkCard1 = (cardValue) => {
