@@ -18,15 +18,14 @@ const CardGame = () => {
         axios ({
             url: 'https://deckofcardsapi.com/api/deck/new/shuffle/',
             params: {
-                deck_count: 1
+                deck_count: 5
             }
         }).then((apiData) => {
-            console.log(apiData);
-            console.log(apiData.data.deck_id);
             pullNewDeck(apiData.data.deck_id);
         })
 
-        // will likely need to put something to trigger this call again in dependency array, when the deck count has reached max and needs a shuffle
+        // will likely need to put something to trigger this call again in dependency array, when the deck count has reached max and needs a shuffle. for now I just have the deck count at 5 so that it gives 130 pulls before erroring out
+        
     }, [])
 
     return (

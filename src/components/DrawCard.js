@@ -8,54 +8,104 @@ import ComputerMsg from "./ComputerMsg";
 
 const DrawCard = (props) => {
 
-    let [ twoCards, setTwoCards ] = useState([]);
+    let [ card1Object, setCard1Object ] = useState([]);
+
+    let [ card2Object, setCard2Object ] = useState([]);
+
+    let [ card1Array, setCard1Array ] = useState([]);
+
+    let [ card2Array, setCard2Array ] = useState([]);
+
 
     let [ drawCount, setDrawCount ] = useState(1);
 
-    console.log(props.deckId);
     const deckUrl = 'https://deckofcardsapi.com/api/deck/' + props.deckId + '/draw/';
-    console.log(deckUrl);
 
+    // Put the new data cruncher function here to make sure the card has a real integer value
+    const rawDataConverter1 = (dataArray, dataValue) => {
 
-    const handleClick = () => {
-        setDrawCount(drawCount++);
-        console.log(drawCount);
-        // some kind of logic here eventually for if the draw count reaches 26, start a new deck
-        // Basically, if drawCount === 26 then
-            // set some kind of drawReset variable to true which would trigger the reshuffle in CardGame
-            // reset drawCount to 1
-            // reset drawReset to false
+        const newCardArray = Object.entries(dataArray);
+
+        if (dataValue <= 9) {
+            newCardArray.push(dataValue);
+        } else if (dataValue === "10" ) {
+            newCardArray.push(10);
+        } else if (dataValue === "JACK") {
+            newCardArray.push(11);
+        } else if (dataValue === "QUEEN") {
+            newCardArray.push(12);
+        } else if (dataValue === "KING") {
+            newCardArray.push(13);
+        } else if (dataValue === "ACE") {
+            newCardArray.push(14);
+        } else {
+            alert("There was an error while checking card values");
+        }
+
+        setCard1Array(newCardArray);
+        return card1Array;
+    };
+
+    const rawDataConverter2 = (dataArray, dataValue) => {
+
+        const newCardArray = Object.entries(dataArray);
+
+        if (dataValue <= 9) {
+            newCardArray.push(dataValue);
+        } else if (dataValue === "10" ) {
+            newCardArray.push(10);
+        } else if (dataValue === "JACK") {
+            newCardArray.push(11);
+        } else if (dataValue === "QUEEN") {
+            newCardArray.push(12);
+        } else if (dataValue === "KING") {
+            newCardArray.push(13);
+        } else if (dataValue === "ACE") {
+            newCardArray.push(14);
+        } else {
+            alert("There was an error while checking card values");
+        }
+
+        newCardArray.push('card2');
+
+        setCard2Array(newCardArray);
+        return card2Array;
     };
 
     useEffect( () => {
-
-        axios ({
-            url: deckUrl,
-            params: {
-                count: 2
-            }
-        }).then((twoCards) => {
-            setTwoCards(twoCards.data.cards);
-            console.log(twoCards.data.cards);
-        }) 
+        if (deckUrl === 'https://deckofcardsapi.com/api/deck//draw/') {
+        } else {
+            axios ({
+                url: deckUrl,
+                params: {
+                    count: 2
+                }
+            }).then( (bothCardsRaw) => {
+                const bothCardsRawEntries = Object.entries(bothCardsRaw)
+                setCard1Object(bothCardsRaw.data.cards[0])
+                setCard2Object(bothCardsRaw.data.cards[1])
+                rawDataConverter1(bothCardsRaw.data.cards[0], bothCardsRaw.data.cards[0].value)
+                rawDataConverter2(bothCardsRaw.data.cards[1], bothCardsRaw.data.cards[1].value)
+            }); 
+        }
     }, [drawCount])
-    
-    // I'm not quite sure how to adjust the card presentations so that one says user card and one says computer card. I will do one of two things:
-        // Figure out how to make a ternary statement that basically says if card 1, print "User card", else print "Computer card". That could either go here somewhere or in the UserCard, I'm not sure how it works yet
-        // I could potentially get this done with CSS by just including the blocks inside of a larger frame in the DrawCard or CardGame modules and move the headings to an overview category that isn't generating the fresh images
 
     return (
         <div>
             <h2>Draw Card Component</h2>
-            {twoCards.map((card) => {
-                return(
-                    <UserCard key={card.code} photoUrl={card.image} altText={card.value + " of " + card.suit} value={card.value} />
-                )
-             })}
+                    <h3>User Card</h3>
+                    {card1Array === undefined ?
+                    <UserCard key={"card1"} photoUrl={card1Object.image} altText={card1Object.value + " of " + card1Object.suit} />
+                    : <UserCard key={"card1"} photoUrl={card1Object.image} altText={"Draw a card to begin"}  />
+                    }
 
-            {/* Still need to figure out why I have to click this button twice to get the draw to run. it seems to update the state variable that I need to trigger the useEffect each time, but it only actually updates the cards on every second click */}
-            <button onClick={handleClick}>Click me to draw cards</button>
-            <ComputerMsg twoCards={twoCards}/>
+                    <h3>Computer Card</h3>
+                    {card2Array === undefined ?
+                    <UserCard key={"card2"} photoUrl={card2Object.image} altText={card2Object.value + " of " + card2Object.suit}  whichCard={card2Array[6]}/>
+                    :<UserCard key={"card2"} photoUrl={card2Object.image} altText={"Draw a card to begin"}  /> }
+
+            <button onClick={()=>{setDrawCount(drawCount + 1)}}>Click me to draw cards</button>
+            <ComputerMsg card1={card1Array} card2={card2Array}/>
 
         </div>
     )
