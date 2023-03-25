@@ -16,9 +16,6 @@ const DrawCard = (props) => {
 
     let [ card2Array, setCard2Array ] = useState([]);
 
-
-    let [ drawCount, setDrawCount ] = useState(1);
-
     const deckUrl = 'https://deckofcardsapi.com/api/deck/' + props.deckId + '/draw/';
 
     // Put the new data cruncher function here to make sure the card has a real integer value
@@ -81,14 +78,13 @@ const DrawCard = (props) => {
                     count: 2
                 }
             }).then( (bothCardsRaw) => {
-                const bothCardsRawEntries = Object.entries(bothCardsRaw)
                 setCard1Object(bothCardsRaw.data.cards[0])
                 setCard2Object(bothCardsRaw.data.cards[1])
                 rawDataConverter1(bothCardsRaw.data.cards[0], bothCardsRaw.data.cards[0].value)
                 rawDataConverter2(bothCardsRaw.data.cards[1], bothCardsRaw.data.cards[1].value)
             }); 
         }
-    }, [drawCount])
+    }, [props.drawCount])
 
     return (
         <div>
@@ -104,7 +100,7 @@ const DrawCard = (props) => {
                     <UserCard key={"card2"} photoUrl={card2Object.image} altText={card2Object.value + " of " + card2Object.suit}  whichCard={card2Array[6]}/>
                     :<UserCard key={"card2"} photoUrl={card2Object.image} altText={"Draw a card to begin"}  /> }
 
-            <button onClick={()=>{setDrawCount(drawCount + 1)}}>Click me to draw cards</button>
+            <button onClick={props.drawCountHandler}>Click me to draw cards</button>
             <ComputerMsg card1={card1Array} card2={card2Array}/>
 
         </div>
