@@ -2,22 +2,26 @@ import { useState, useEffect } from "react";
 
 const CardDisplay = (props) => {
 
-    const [ runMsgAnimation, setRunMsgAnimation ] = useState(false);
+    const [ cardAnimation, setCardAnimation ] = useState(false);
 
     useEffect( () => {
-        setRunMsgAnimation(true);
+        setCardAnimation(true);
         setTimeout( () => {
-            setRunMsgAnimation(false);
+            setCardAnimation(false);
         }, 300)
     }, [props.photoUrl])
-
-
+    
     return (
         <div>
             <figure className="cardDisplay">
-                {runMsgAnimation === true ? 
-                <img className="runTossCard" src={props.photoUrl === undefined ? "../cardBack.png" : props.photoUrl} alt={props.altText}/>: 
-                <img src={props.photoUrl === undefined ? "../cardBack.png" : props.photoUrl} alt={props.altText}/>}
+                {props.whichCard === "card1" ?
+                    (cardAnimation === true ? 
+                        <img className="runTossCard" src={props.photoUrl === undefined ? "../cardBack.png" : props.photoUrl} alt={props.altText}/>: 
+                        <img src={props.photoUrl === undefined ? "../cardBack.png" : props.photoUrl} alt={props.altText}/>)
+                :   (cardAnimation === true ? 
+                        <img className="runTossCardR" src={props.photoUrl === undefined ? "../cardBack.png" : props.photoUrl} alt={props.altText}/>: 
+                        <img src={props.photoUrl === undefined ? "../cardBack.png" : props.photoUrl} alt={props.altText}/>)
+                }
             </figure>
         </div>
     )

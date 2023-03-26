@@ -74,14 +74,6 @@ const DrawCard = (props) => {
         return card2Array;
     };
 
-    // const calculateScore = (userCardValue, compCardValue) => {
-    //     if (userCardValue > compCardValue) {
-    //         setUserScore(userScore + 1);
-    //     } else if (userCardValue < compCardValue){
-    //         setCompScore(compScore + 1);
-    //     }
-    // };
-
     // This is a function set a winning streak counter, but right now it only updates the actual number on the page after the next set of cards has dropped. Example: you have no streak, then you win a round, it won't change the streak number to 1 until the next time you click to draw cards so it's always one round behind. Want it to show right when the win happens and be cleared if you lose. For now I'm commenting out to work on scoring
     // const handleStreak = (newArrayValue1, newArrayValue2) => {
     //     if (newArrayValue1 > newArrayValue2) {
@@ -104,12 +96,6 @@ const DrawCard = (props) => {
                 setCard2Object(bothCardsRaw.data.cards[1]);
                 rawDataConverter1(bothCardsRaw.data.cards[0], bothCardsRaw.data.cards[0].value);
                 rawDataConverter2(bothCardsRaw.data.cards[1], bothCardsRaw.data.cards[1].value);
-
-                // // call the streaking function
-                // handleStreak(card1Array[5], card2Array[5]);
-
-                // call the calculate score function
-                // calculateScore(card1Array[5], card2Array[5]);
             });
         }
     }, [props.drawCount])
@@ -119,7 +105,7 @@ const DrawCard = (props) => {
             <div className="cardArea">
                 <div className="cardBlock">
                     <h3>Your Card</h3>
-                    <CardDisplay key={"card1"} photoUrl={card1Object.image} altText={card1Array === undefined ? card1Object.value + " of " + card1Object.suit : "The back of a playing card. Draw a card to start playing!"}/>
+                    <CardDisplay key={"card1"} whichCard={"card1"} photoUrl={card1Object.image} altText={card1Array === undefined ? card1Object.value + " of " + card1Object.suit : "The back of a playing card. Draw a card to start playing!"}/>
                 </div>
                 <div className="msgBlock">
                     <ComputerMsg

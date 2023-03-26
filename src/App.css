@@ -188,7 +188,9 @@ footer p {
 
 .runTossCard {
   animation: tossCard 0.3s linear 1;
-
+}
+.runTossCardR {
+  animation: tossCardR 0.3s linear 1;
 }
 
 @keyframes fadeMsg {
@@ -202,18 +204,23 @@ footer p {
 
 @keyframes tossCard {
   0% {
-    /* position: absolute;
-    transform: translateY(180deg);
-    bottom: 300px; */
     opacity: 0%;
+    transform: rotate(270deg) translateY(200%);
   }
-  /* 80% {
-    transform: translateY(0deg);
-  } */
   100% {
-    /* bottom: 0;
-    position: static; */
     opacity: 100%;
+    transform: rotate(0deg) translateY(0);
+  }
+}
+
+@keyframes tossCardR {
+  0% {
+    opacity: 0%;
+    transform: rotate(-270deg) translateY(200%);
+  }
+  100% {
+    opacity: 100%;
+    transform: rotate(0deg) translateY(0);
   }
 }
 
