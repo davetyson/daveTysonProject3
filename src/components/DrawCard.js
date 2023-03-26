@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 
 import axios from "axios";
 
-// import ComputerCard from "./ComputerCard";
-import UserCard from "./UserCard";
+import CardDisplay from "./CardDisplay";
 import ComputerMsg from "./ComputerMsg";
 
 const DrawCard = (props) => {
@@ -87,23 +86,28 @@ const DrawCard = (props) => {
     }, [props.drawCount])
 
     return (
-        <div>
-            <h2>Draw Card Component</h2>
-                    <h3>User Card</h3>
+        <section className="gameArea">
+            <div className="cardArea">
+                <div className="cardBlock">
+                    <h3>Your Card</h3>
                     {card1Array === undefined ?
-                    <UserCard key={"card1"} photoUrl={card1Object.image} altText={card1Object.value + " of " + card1Object.suit} />
-                    : <UserCard key={"card1"} photoUrl={card1Object.image} altText={"Draw a card to begin"}  />
+                    <CardDisplay key={"card1"} photoUrl={card1Object.image} altText={card1Object.value + " of " + card1Object.suit} />
+                    : <CardDisplay key={"card1"} photoUrl={card1Object.image} altText={"The back of a playing card. Draw a card to start playing!"}  />
                     }
-
-                    <h3>Computer Card</h3>
+                </div>
+                <div className="msgBlock">
+                    <ComputerMsg card1={card1Array} card2={card2Array}/>
+                    <button onClick={props.drawCountHandler}>Draw cards</button>
+                </div>
+                <div className="cardBlock">
+                    <h3>Cardbot</h3>
                     {card2Array === undefined ?
-                    <UserCard key={"card2"} photoUrl={card2Object.image} altText={card2Object.value + " of " + card2Object.suit}  whichCard={card2Array[6]}/>
-                    :<UserCard key={"card2"} photoUrl={card2Object.image} altText={"Draw a card to begin"}  /> }
+                    <CardDisplay key={"card2"} photoUrl={card2Object.image} altText={card2Object.value + " of " + card2Object.suit}  whichCard={card2Array[6]}/>
+                    :<CardDisplay key={"card2"} photoUrl={card2Object.image} altText={"The back of a playing card. Draw a card to start playing!"}  /> }
+                </div>
+            </div>
 
-            <button onClick={props.drawCountHandler}>Click me to draw cards</button>
-            <ComputerMsg card1={card1Array} card2={card2Array}/>
-
-        </div>
+        </section>
     )
 }
 

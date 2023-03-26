@@ -47,8 +47,9 @@ const CardGame = () => {
 
     return (
         <>
-            <h2>Card Game Component</h2>
-            <DrawCard deckId={deckId} drawCountHandler={drawCountHandler} drawCount={drawCount}/>
+            <section className="cardGame">
+                <DrawCard deckId={deckId} drawCountHandler={drawCountHandler} drawCount={drawCount}/>
+            </section>
         </>
     )
 }

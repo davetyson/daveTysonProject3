@@ -19,8 +19,10 @@ const ComputerMsg = (props) => {
 
     return (
         <div>
-            <h2>Computer Message Component</h2>
-            <p>{computerMsg}</p>
+            <h3>Cardbot says:</h3>
+            <div className="msgCenter">
+                <p className="computerMsg">{computerMsg}</p>
+            </div>
         </div>
     )
 }
