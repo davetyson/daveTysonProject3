@@ -9,26 +9,20 @@ import DrawCard from "./DrawCard";
 
 const CardGame = () => {
 
-    let [ deckId, pullNewDeck ] = useState([]);
+    const [ deckId, pullNewDeck ] = useState([]);
 
-    let [ drawCount, setDrawCount ] = useState(0);
-
-    console.log(drawCount);
+    const [ drawCount, setDrawCount ] = useState(0);
 
     const drawCountHandler = () => {
-        if (drawCount === 26) {
-            setDrawCount(1);
-        } else if (drawCount === 0){
+        if (drawCount === 26 || drawCount === 0) {
             setDrawCount(1);
         } else {
             setDrawCount(drawCount + 1);
-            console.log(drawCount);
         }
     };
 
     useEffect( () => {
-        if (drawCount > 0 && drawCount < 26) {
-            console.log(drawCount)
+        if (drawCount > 1 && drawCount < 26) {
         } else if (drawCount === 0) {
             setDrawCount(1);
             axios ({
@@ -38,7 +32,6 @@ const CardGame = () => {
                 }
             }).then((apiData) => {
                 pullNewDeck(apiData.data.deck_id);
-                console.log(apiData.data.deck_id);
             })
         } else if (drawCount >= 26) {
             axios ({
@@ -48,7 +41,6 @@ const CardGame = () => {
                 }
             }).then((apiData) => {
                 pullNewDeck(apiData.data.deck_id);
-                console.log(apiData.data.deck_id);
             })
         }
     }, [drawCount])

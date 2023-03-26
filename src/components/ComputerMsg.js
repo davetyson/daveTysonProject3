@@ -2,10 +2,7 @@ import { useState, useEffect } from "react";
 
 const ComputerMsg = (props) => {
 
-    const [ computerMsg, setComputerMsg ] = useState('')
-
-    console.log(props.card1);
-    console.log(props.card2);
+    const [ computerMsg, setComputerMsg ] = useState('');
 
     useEffect( () => {
         if (props.card1[5] > props.card2[5]) {

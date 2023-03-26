@@ -2,13 +2,10 @@
 
 const CardDisplay = (props) => {
 
-    console.log(props.photoUrl);
-    console.log(props.altText);
-
     return (
         <div>
             <figure className="cardDisplay">
-                <img src={props.photoUrl} alt={props.altText}/>
+                <img src={props.photoUrl === undefined ? "../cardBack.png" : props.photoUrl} alt={props.altText}/>
             </figure>
         </div>
     )
