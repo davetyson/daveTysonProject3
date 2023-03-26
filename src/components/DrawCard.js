@@ -142,7 +142,7 @@ const DrawCard = (props) => {
                             </div>
                         </div>
                         <div className="scorebox">
-                            <h4>Computer Score: </h4>
+                            <h4>Cardbot Score: </h4>
                             <div className="centerScore">
                                 <p>{compScore}</p>
                             </div>

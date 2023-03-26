@@ -183,7 +183,12 @@ footer p {
 }
 
 .msgAnimationRun {
-  animation: fadeMsg 0.5s linear 1;
+  animation: fadeMsg 0.3s linear 1;
+}
+
+.runTossCard {
+  animation: tossCard 0.3s linear 1;
+
 }
 
 @keyframes fadeMsg {
@@ -191,6 +196,23 @@ footer p {
     opacity: 0%
   }
   100% {
+    opacity: 100%;
+  }
+}
+
+@keyframes tossCard {
+  0% {
+    /* position: absolute;
+    transform: translateY(180deg);
+    bottom: 300px; */
+    opacity: 0%;
+  }
+  /* 80% {
+    transform: translateY(0deg);
+  } */
+  100% {
+    /* bottom: 0;
+    position: static; */
     opacity: 100%;
   }
 }
@@ -224,21 +246,6 @@ footer p {
   }
 
 }
-
-/* @keyframes tossCard {
-  0% {
-    position: absolute;
-    transform: translateY(180deg);
-    bottom: 300px;
-  }
-  80% {
-    transform: translateY(0deg);
-  }
-  100% {
-    bottom: 0;
-    position: static;
-  }
-} */
 
 
 /* .App {
