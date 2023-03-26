@@ -2,6 +2,9 @@
 
 const CardDisplay = (props) => {
 
+    console.log(props.photoUrl);
+    console.log(props.altText);
+
     return (
         <div>
             <figure className="cardDisplay">

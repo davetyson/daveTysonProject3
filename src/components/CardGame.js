@@ -13,18 +13,24 @@ const CardGame = () => {
 
     let [ drawCount, setDrawCount ] = useState(0);
 
+    console.log(drawCount);
+
     const drawCountHandler = () => {
         if (drawCount === 26) {
             setDrawCount(1);
+        } else if (drawCount === 0){
+            setDrawCount(1);
         } else {
             setDrawCount(drawCount + 1);
+            console.log(drawCount);
         }
     };
 
     useEffect( () => {
         if (drawCount > 0 && drawCount < 26) {
+            console.log(drawCount)
         } else if (drawCount === 0) {
-            drawCount = 1;
+            setDrawCount(1);
             axios ({
                 url: 'https://deckofcardsapi.com/api/deck/new/shuffle/',
                 params: {
@@ -32,6 +38,7 @@ const CardGame = () => {
                 }
             }).then((apiData) => {
                 pullNewDeck(apiData.data.deck_id);
+                console.log(apiData.data.deck_id);
             })
         } else if (drawCount >= 26) {
             axios ({
@@ -41,6 +48,7 @@ const CardGame = () => {
                 }
             }).then((apiData) => {
                 pullNewDeck(apiData.data.deck_id);
+                console.log(apiData.data.deck_id);
             })
         }
     }, [drawCount])

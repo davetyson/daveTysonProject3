@@ -4,6 +4,9 @@ const ComputerMsg = (props) => {
 
     const [ computerMsg, setComputerMsg ] = useState('')
 
+    console.log(props.card1);
+    console.log(props.card2);
+
     useEffect( () => {
         if (props.card1[5] > props.card2[5]) {
             setComputerMsg("You win!");
