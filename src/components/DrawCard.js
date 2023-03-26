@@ -1,33 +1,31 @@
+// Import React hooks
 import { useState, useEffect } from "react";
 
+// Import axios
 import axios from "axios";
 
+// Import child components
 import CardDisplay from "./CardDisplay";
 import ComputerMsg from "./ComputerMsg";
 
+// Build component
 const DrawCard = (props) => {
 
+    // Set state variables
     const [ card1Object, setCard1Object ] = useState([]);
-
     const [ card2Object, setCard2Object ] = useState([]);
-
     const [ card1Array, setCard1Array ] = useState([]);
-
     const [ card2Array, setCard2Array ] = useState([]);
-
     const [ userScore, setUserScore ] = useState(0);
-
     const [ compScore, setCompScore ] = useState(0);
-
     const [ streak, setStreak ] = useState(0);
 
+    // Set the current deck URL to pull cards from
     const deckUrl = 'https://deckofcardsapi.com/api/deck/' + props.deckId + '/draw/';
 
-    // Put the new data cruncher function here to make sure the card has a real integer value
+    // Declare 2 functions (rawDataConverter 1 & 2) to handle the API data coming in from the card pull and sort it into the Arrays and Objects I need to properly compare the values and determine a winner
     const rawDataConverter1 = (dataArray, dataValue) => {
-
         const newCardArray = Object.entries(dataArray);
-
         if (dataValue <= 9) {
             newCardArray.push(dataValue);
         } else if (dataValue === "10" ) {
@@ -43,15 +41,12 @@ const DrawCard = (props) => {
         } else {
             alert("There was an error while checking card values");
         }
-
         setCard1Array(newCardArray);
         return card1Array;
     };
 
     const rawDataConverter2 = (dataArray, dataValue) => {
-
         const newCardArray = Object.entries(dataArray);
-
         if (dataValue <= 9) {
             newCardArray.push(dataValue);
         } else if (dataValue === "10" ) {
@@ -68,13 +63,14 @@ const DrawCard = (props) => {
             alert("There was an error while checking card values");
         }
 
+        // Extra line in this one so I can determine which card needs the alt animation later
         newCardArray.push('card2');
 
         setCard2Array(newCardArray);
         return card2Array;
     };
 
-    // This is a function set a winning streak counter, but right now it only updates the actual number on the page after the next set of cards has dropped. Example: you have no streak, then you win a round, it won't change the streak number to 1 until the next time you click to draw cards so it's always one round behind. Want it to show right when the win happens and be cleared if you lose. For now I'm commenting out to work on scoring
+    // This is a function set a winning streak counter, but I'm not sure it's necessary, so commenting it out for now
     // const handleStreak = (newArrayValue1, newArrayValue2) => {
     //     if (newArrayValue1 > newArrayValue2) {
     //         setStreak(streak + 1);
@@ -83,6 +79,7 @@ const DrawCard = (props) => {
     //     }
     // };
 
+    // useEffect to draw 2 new cards every time the button is clicked (technically it's activated when the state that is changed by the button click changes). The raw card data is sorted into the data I need with the functions I declared above
     useEffect( () => {
         if (props.drawCount < 2) {
         } else {
@@ -101,12 +98,17 @@ const DrawCard = (props) => {
     }, [props.drawCount])
 
     return (
+        // The main gameplay area
         <section className="gameArea">
             <div className="cardArea">
+
+                {/* User card block */}
                 <div className="cardBlock">
                     <h3>Your Card</h3>
                     <CardDisplay key={"card1"} whichCard={"card1"} photoUrl={card1Object.image} altText={card1Array === undefined ? card1Object.value + " of " + card1Object.suit : "The back of a playing card. Draw a card to start playing!"}/>
                 </div>
+
+                {/* Message block, draw button, scores */}
                 <div className="msgBlock">
                     <ComputerMsg
                         card1={card1Array} 
@@ -133,6 +135,8 @@ const DrawCard = (props) => {
                                 <p>{compScore}</p>
                             </div>
                         </div>
+                        
+                        {/* Here's the code for the streak function if I want to add that back */}
                         {/* <div className="streak">
                             <h4>Your Winning Streak: </h4>
                             <div className="centerScore">
@@ -141,6 +145,8 @@ const DrawCard = (props) => {
                         </div> */}
                     </div>
                 </div>
+
+                {/* Computer card block */}
                 <div className="cardBlock">
                     <h3>Cardbot</h3>
                     <CardDisplay key={"card2"} photoUrl={card2Object.image} altText={card2Array === undefined ? card2Object.value + " of " + card2Object.suit : "The back of a playing card. Draw a card to start playing!"}/>

@@ -1,9 +1,13 @@
+// Import React hooks
 import { useState, useEffect } from "react";
 
+// Build component
 const CardDisplay = (props) => {
 
+    // Set up state variables
     const [ cardAnimation, setCardAnimation ] = useState(false);
 
+    // useEffect to trigger animation styles
     useEffect( () => {
         setCardAnimation(true);
         setTimeout( () => {
@@ -12,18 +16,19 @@ const CardDisplay = (props) => {
     }, [props.photoUrl])
     
     return (
-        <div>
+        <>
+            {/* Conditional card block to display the right card/animation combo */}
             <figure className="cardDisplay">
                 {props.whichCard === "card1" ?
                     (cardAnimation === true ? 
-                        <img className="runTossCard" src={props.photoUrl === undefined ? "../cardBack.png" : props.photoUrl} alt={props.altText}/>: 
+                        <img className="runTossCardL" src={props.photoUrl === undefined ? "../cardBack.png" : props.photoUrl} alt={props.altText}/>: 
                         <img src={props.photoUrl === undefined ? "../cardBack.png" : props.photoUrl} alt={props.altText}/>)
                 :   (cardAnimation === true ? 
                         <img className="runTossCardR" src={props.photoUrl === undefined ? "../cardBack.png" : props.photoUrl} alt={props.altText}/>: 
                         <img src={props.photoUrl === undefined ? "../cardBack.png" : props.photoUrl} alt={props.altText}/>)
                 }
             </figure>
-        </div>
+        </>
     )
 }
 

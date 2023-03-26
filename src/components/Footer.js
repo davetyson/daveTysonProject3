@@ -1,19 +1,19 @@
+// Import React hooks
 import { useState, useEffect } from "react";
 
+// Build component
 const Footer = () => {
 
-    let [currentYear, setCurrentYear] = useState();
+    // Declare state variables
+    const [currentYear, setCurrentYear] = useState();
 
-    // // Footer Year function
-    // const footerYear = () => {
-
-    // };
-
+    // useEffect to check for the current year on page load and generate that
     useEffect( () => {
         setCurrentYear(new Date().getFullYear());
     }, []);
 
     return (
+        // Footer generated with the current year from the useEffect above
         <footer>
             <p>© Dave Tyson {currentYear}. Created at Juno College.</p>
         </footer>

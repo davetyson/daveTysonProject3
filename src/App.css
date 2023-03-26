@@ -1,5 +1,5 @@
+/* Global & wrapper styles */
 html {
-  /* background-color: #237212; */
   background-image: url('../cardTableTile.jpg');
   background-repeat: repeat;
   font-family: 'IM Fell Double Pica SC', serif;
@@ -26,8 +26,6 @@ ul {
 }
 
 img {
-  /* max-height: 314px;
-  max-width: 226px; */
   display: block;
   width: 100%;
   height: 100%;
@@ -57,13 +55,8 @@ button {
 }
 
 h1 {
-  /* font-family: 'Neonderthaw', cursive; */
   font-size: 3rem;
   text-transform: uppercase;
-  /* background-color: rgba(0, 0, 0, 0.1);
-  border-radius: 30px;
-  box-shadow: inset 0px 0px 10px 10px #FED267;
-  padding: 20px 30px; */
   width: fit-content;
   margin: 20px auto;
 }
@@ -74,11 +67,11 @@ h1 {
   width: 85%;
 }
 
+/* Card game styles */
 .cardGame {
   border: 5px solid #FFF;
   border-radius: 30px;
   padding: 20px;
-  /* min-height: 350px; */
 }
 
 .cardArea {
@@ -97,6 +90,7 @@ h1 {
   align-content: space-evenly;
 }
 
+/* Computer message/scoring block styles */
 .msgBlock {
   display: flex;
   height: calc(100% - 20px);
@@ -153,16 +147,9 @@ h1 {
   text-shadow: none;
   height: fit-content;
   min-width: 300px;
-  /* color: #000;
-  background-color: #FED267;
-  border: 2px solid black;
-  border-radius: 30px; */
-  /* vertical-align: middle; */
-  /* height: 60%;
-  margin: auto 0;
-  padding: 10px 8px; */
 }
 
+/* Instructions & footer styles */
 .instructions {
   margin-top: 10px;
 }
@@ -182,12 +169,13 @@ footer p {
   padding: 10px 8px;
 }
 
+/* Animation styles */
 .msgAnimationRun {
   animation: fadeMsg 0.3s linear 1;
 }
 
-.runTossCard {
-  animation: tossCard 0.3s linear 1;
+.runTossCardL {
+  animation: tossCardL 0.3s linear 1;
 }
 .runTossCardR {
   animation: tossCardR 0.3s linear 1;
@@ -202,7 +190,7 @@ footer p {
   }
 }
 
-@keyframes tossCard {
+@keyframes tossCardL {
   0% {
     opacity: 0%;
     transform: rotate(270deg) translateY(200%);
@@ -224,14 +212,15 @@ footer p {
   }
 }
 
+/* Media queries */
 @media only screen and (max-width: 1024px) {
   html {
     font-size: 100%;
   }
 
   figure {
-    height: 157px;
-    width: 113px;
+    height: 235.5px;
+    width: 169.5px;
   }
 
   .cardArea {
@@ -251,45 +240,11 @@ footer p {
   .msgCenter {
     min-height: 60px;
   }
-
 }
 
-
-/* .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@media only screen and (max-width: 768px) {
+  figure {
+    height: 157px;
+    width: 113px;
   }
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
