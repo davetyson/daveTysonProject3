@@ -59,6 +59,7 @@ button {
 h1 {
   /* font-family: 'Neonderthaw', cursive; */
   font-size: 3rem;
+  text-transform: uppercase;
   /* background-color: rgba(0, 0, 0, 0.1);
   border-radius: 30px;
   box-shadow: inset 0px 0px 10px 10px #FED267;
@@ -103,6 +104,10 @@ h1 {
   justify-content: space-evenly;
 }
 
+.msgBlock h3 {
+  margin: 10px auto;
+}
+
 .msgCenter {
   display: flex;
   justify-content: center;
@@ -116,6 +121,29 @@ h1 {
   height: 60%;
   margin: 20px 0 auto 0;
   padding: 10px;
+}
+
+.streak,
+.scorebox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  border: 2px solid #FED267;
+  border-radius: 30px;
+  margin: 10px auto;
+}
+
+.streak p,
+.scorebox p {
+  display: inline-block;
+}
+
+.centerScore {
+  margin: 0 0 0 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .computerMsg {
@@ -145,7 +173,7 @@ footer p {
   font-family: 'Roboto', sans-serif;
   text-shadow: none;
   height: fit-content;
-  margin: 10px auto 0 auto;
+  margin: 10px auto 10px auto;
   color: #000;
   background-color: #FED267;
   border: 2px solid black;
