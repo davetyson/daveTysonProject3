@@ -11,9 +11,6 @@ const ComputerMsg = (props) => {
     // Set state variables
     const [ computerMsg, setComputerMsg ] = useState('');
     const [ runMsgAnimation, setRunMsgAnimation ] = useState(false);
-    // const [ card1State, setCard1State ] = useState([]);
-    // const [ card2State, setCard2State ] = useState([]);
-
 
     // // If I use firebase, these state values will be for that
     // const [ winResponses, setWinResponses ] = useState([]);
@@ -25,7 +22,7 @@ const ComputerMsg = (props) => {
     // useEffect to determine the win/loss/tie message to display & to set the scores
     useEffect( () => {
 
-        const { card1, card2, setUserScore, setStreak, setCompScore, streak, userScore, compScore} = props;
+        const { setUserScore, setStreak, setCompScore, streak, userScore, compScore} = props;
 
         // Set response arrays
         const lossResponses = ["You lose! Cardbot is the victor!", "You lost! Better luck next time!", "I have defeated you!"];
@@ -38,10 +35,6 @@ const ComputerMsg = (props) => {
         // get(dbRef, (response) => {
         //    console.log(response.val());
         //  });
-
-        // setWinResponses(winResponsesOG);
-        // setLossResponses(lossResponsesOG);
-        // setTieResponses(tieResponsesOG);
 
         setRunMsgAnimation(true);
         if (card1[5] > card2[5]) {
@@ -63,7 +56,8 @@ const ComputerMsg = (props) => {
         setTimeout( () => {
             setRunMsgAnimation(false);
         }, 300)
-
+        
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [card1, card2])
 
     return (

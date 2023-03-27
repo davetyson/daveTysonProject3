@@ -98,7 +98,7 @@ const DrawCard = (props) => {
                 rawDataConverter2(bothCardsRaw.data.cards[1], bothCardsRaw.data.cards[1].value);
             });
         }
-    }, [drawCount])
+    }, [drawCount, props])
 
     return (
         // The main gameplay area

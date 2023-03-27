@@ -8,6 +8,7 @@ html {
   color: #FED267;
   text-shadow: #000 1px 2px 3px;
   text-align: center;
+  overflow-x: hidden;
 }
 
 .App {
@@ -65,6 +66,7 @@ h1 {
 
 h2 {
   font-family: 'IM Fell Double Pica SC', serif;
+  font-size: 1.8rem;
 }
 
 h3 {
@@ -120,7 +122,7 @@ h3 {
   background-color: #000;
   border: 2px solid #FED267;
   border-radius: 30px;
-  min-height: 150px;
+  min-height: 100px;
   min-width: 150px;
   height: 60%;
   margin: 10px 0 auto 0;
