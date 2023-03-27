@@ -21,10 +21,10 @@ const CardDisplay = (props) => {
             <figure className="cardDisplay">
                 {props.whichCard === "card1" ?
                     (cardAnimation === true ? 
-                        <img className="runTossCardL" src={props.photoUrl === undefined ? "../cardBack.png" : props.photoUrl} alt={props.altText}/>: 
+                        <img className={props.photoUrl === undefined ? "" : "runTossCardL"} src={props.photoUrl === undefined ? "../cardBack.png" : props.photoUrl} alt={props.altText}/>: 
                         <img src={props.photoUrl === undefined ? "../cardBack.png" : props.photoUrl} alt={props.altText}/>)
                 :   (cardAnimation === true ? 
-                        <img className="runTossCardR" src={props.photoUrl === undefined ? "../cardBack.png" : props.photoUrl} alt={props.altText}/>: 
+                        <img className={props.photoUrl === undefined ? "" : "runTossCardR"} src={props.photoUrl === undefined ? "../cardBack.png" : props.photoUrl} alt={props.altText}/>: 
                         <img src={props.photoUrl === undefined ? "../cardBack.png" : props.photoUrl} alt={props.altText}/>)
                 }
             </figure>
