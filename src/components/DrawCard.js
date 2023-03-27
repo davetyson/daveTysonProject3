@@ -20,8 +20,24 @@ const DrawCard = (props) => {
     const [ compScore, setCompScore ] = useState(0);
     const [ streak, setStreak ] = useState(0);
 
+    // This is a function set a winning streak counter, but I'm not sure it's necessary, so commenting it out for now
+    // const handleStreak = (newArrayValue1, newArrayValue2) => {
+    //     if (newArrayValue1 > newArrayValue2) {
+    //         setStreak(streak + 1);
+    //     } else {
+    //         setStreak(0);
+    //     }
+    // };
+
+    const { drawCount } = props;
+
+    // useEffect to draw 2 new cards every time the button is clicked (technically it's activated when the state that is changed by the button click changes). The raw card data is sorted into the data I need with the functions I declared above
+    useEffect( () => {
+
+    const { deckId } = props;
+
     // Set the current deck URL to pull cards from
-    const deckUrl = 'https://deckofcardsapi.com/api/deck/' + props.deckId + '/draw/';
+    const deckUrl = `https://deckofcardsapi.com/api/deck/${deckId}/draw/`;
 
     // Declare 2 functions (rawDataConverter 1 & 2) to handle the API data coming in from the card pull and sort it into the Arrays and Objects I need to properly compare the values and determine a winner
     const rawDataConverter1 = (dataArray, dataValue) => {
@@ -42,7 +58,6 @@ const DrawCard = (props) => {
             alert("There was an error while checking card values");
         }
         setCard1Array(newCardArray);
-        return card1Array;
     };
 
     const rawDataConverter2 = (dataArray, dataValue) => {
@@ -67,21 +82,9 @@ const DrawCard = (props) => {
         newCardArray.push('card2');
 
         setCard2Array(newCardArray);
-        return card2Array;
     };
 
-    // This is a function set a winning streak counter, but I'm not sure it's necessary, so commenting it out for now
-    // const handleStreak = (newArrayValue1, newArrayValue2) => {
-    //     if (newArrayValue1 > newArrayValue2) {
-    //         setStreak(streak + 1);
-    //     } else {
-    //         setStreak(0);
-    //     }
-    // };
-
-    // useEffect to draw 2 new cards every time the button is clicked (technically it's activated when the state that is changed by the button click changes). The raw card data is sorted into the data I need with the functions I declared above
-    useEffect( () => {
-        if (props.drawCount < 2) {
+        if (drawCount < 2) {
         } else {
             axios ({
                 url: deckUrl,
@@ -95,7 +98,7 @@ const DrawCard = (props) => {
                 rawDataConverter2(bothCardsRaw.data.cards[1], bothCardsRaw.data.cards[1].value);
             });
         }
-    }, [props.drawCount])
+    }, [drawCount])
 
     return (
         // The main gameplay area
@@ -104,7 +107,7 @@ const DrawCard = (props) => {
 
                 {/* User card block */}
                 <div className="cardBlock">
-                    <h3>Your Card</h3>
+                    <h2>Your Card</h2>
                     <CardDisplay key={"card1"} whichCard={"card1"} photoUrl={card1Object.image} altText={card1Array === undefined ? card1Object.value + " of " + card1Object.suit : "The back of a playing card. Draw a card to start playing!"}/>
                 </div>
 
@@ -148,7 +151,7 @@ const DrawCard = (props) => {
 
                 {/* Computer card block */}
                 <div className="cardBlock">
-                    <h3>Cardbot</h3>
+                    <h2>Cardbot</h2>
                     <CardDisplay key={"card2"} photoUrl={card2Object.image} altText={card2Array === undefined ? card2Object.value + " of " + card2Object.suit : "The back of a playing card. Draw a card to start playing!"}/>
                 </div>
             </div>

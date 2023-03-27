@@ -1,4 +1,4 @@
-import './App.css';
+import './index.css';
 import Header from './components/Header';
 import CardGame from './components/CardGame';
 import Instructions from './components/Instructions';

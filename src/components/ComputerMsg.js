@@ -3,7 +3,7 @@
 // import { getDatabase, ref } from "firebase/database";
 
 // Import React hooks
-import { useState, useEffect, get } from "react";
+import { useState, useEffect } from "react";
 
 // Build component
 const ComputerMsg = (props) => {
@@ -11,19 +11,26 @@ const ComputerMsg = (props) => {
     // Set state variables
     const [ computerMsg, setComputerMsg ] = useState('');
     const [ runMsgAnimation, setRunMsgAnimation ] = useState(false);
+    // const [ card1State, setCard1State ] = useState([]);
+    // const [ card2State, setCard2State ] = useState([]);
 
-    // If I use firebase, these state values will be for that
+
+    // // If I use firebase, these state values will be for that
     // const [ winResponses, setWinResponses ] = useState([]);
     // const [ lossResponses, setLossResponses ] = useState([]);
     // const [ tieResponses, setTieResponses ] = useState([]);
 
-    // Set response arrays
-    const lossResponses = ["You lose! Cardbot is the victor!", "You lost! Better luck next time!", "I have defeated you!"];
-    const winResponses = ["You win! Let's play again!", "I lost! Maybe I'll win next time :( ", "I have been defeated!"];
-    const tieResponses = ["It's a tie!", "Looks like a tie, we'd better play again!", "Oh, close one!"];
+    const { card1, card2 } = props;
 
     // useEffect to determine the win/loss/tie message to display & to set the scores
     useEffect( () => {
+
+        const { card1, card2, setUserScore, setStreak, setCompScore, streak, userScore, compScore} = props;
+
+        // Set response arrays
+        const lossResponses = ["You lose! Cardbot is the victor!", "You lost! Better luck next time!", "I have defeated you!"];
+        const winResponses = ["You win! Let's play again!", "I lost! Maybe I'll win next time :( ", "I have been defeated!"];
+        const tieResponses = ["It's a tie!", "Looks like a tie, we'd better play again!", "Oh, close one!"];
 
         // This is part of my firebase experiment to get the values from the database to use in the responses, if I use firebase
         // const db = getDatabase(app);
@@ -32,18 +39,22 @@ const ComputerMsg = (props) => {
         //    console.log(response.val());
         //  });
 
+        // setWinResponses(winResponsesOG);
+        // setLossResponses(lossResponsesOG);
+        // setTieResponses(tieResponsesOG);
+
         setRunMsgAnimation(true);
-        if (props.card1[5] > props.card2[5]) {
+        if (card1[5] > card2[5]) {
             let winMsg = Math.floor(Math.random() * winResponses.length);
             setComputerMsg(winResponses[winMsg]);
-            props.setUserScore(props.userScore + 1);
-            props.setStreak(props.streak + 1);
-        } else if (props.card1[5] < props.card2[5]) {
+            setUserScore(userScore + 1);
+            setStreak(streak + 1);
+        } else if (card1[5] < card2[5]) {
             let lossMsg = Math.floor(Math.random() * lossResponses.length);
             setComputerMsg(lossResponses[lossMsg]);
-            props.setCompScore(props.compScore + 1);
-            props.setStreak(0);
-        } else if (props.card1[5] === undefined) {
+            setCompScore(compScore + 1);
+            setStreak(0);
+        } else if (card1[5] === undefined) {
             setComputerMsg("Draw a card to begin playing!")
         } else {
             let tieMsg = Math.floor(Math.random() * tieResponses.length);
@@ -53,7 +64,7 @@ const ComputerMsg = (props) => {
             setRunMsgAnimation(false);
         }, 300)
 
-    }, [props.card1, props.card2])
+    }, [card1, card2])
 
     return (
         <>
