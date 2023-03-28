@@ -5,12 +5,17 @@
 // Import React hooks
 import { useState, useEffect } from "react";
 
+// Import child components
+import StreakDisplay from "./StreakDisplay";
+
 // Build component
 const ComputerMsg = (props) => {
 
     // Set state variables
     const [ computerMsg, setComputerMsg ] = useState('');
     const [ runMsgAnimation, setRunMsgAnimation ] = useState(false);
+    const [ streak, setStreak ] = useState(0);
+    const [ streakDisplay, setStreakDisplay ] = useState(false);
 
     // // If I use firebase, these state values will be for that
     // const [ winResponses, setWinResponses ] = useState([]);
@@ -22,7 +27,7 @@ const ComputerMsg = (props) => {
     // useEffect to determine the win/loss/tie message to display & to set the scores
     useEffect( () => {
 
-        const { setUserScore, setStreak, setCompScore, streak, userScore, compScore} = props;
+        const { setUserScore, setCompScore, userScore, compScore} = props;
 
         // Set response arrays
         const lossResponses = ["You lose! Cardbot is the victor!", "You lost! Better luck next time!", "I have defeated you!"];
@@ -57,11 +62,23 @@ const ComputerMsg = (props) => {
             setRunMsgAnimation(false);
         }, 300)
         
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [card1, card2])
+
+    useEffect(() => {
+        if (streak >= 3) {
+            setStreakDisplay(true);
+        } else {
+            setStreakDisplay(false);
+        }
+
+    }, [streak]);
 
     return (
         <>
+            { streakDisplay === true ?
+            <StreakDisplay streak={streak} /> :
+            null}
             {/* Message block that controls fade in message animation and displays a random win/loss/tie message */}
             <h3>Cardbot says:</h3>
             <div className="msgCenter">

@@ -55,7 +55,7 @@ const CardGame = () => {
               });
         } else if (drawCount >= 26) {
             axios ({
-                url: 'https://deckofcardsapi.com/pi/deck/new/shuffle/',
+                url: 'https://deckofcardsapi.com/api/deck/new/shuffle/',
                 params: {
                     deck_count: 1
                 }

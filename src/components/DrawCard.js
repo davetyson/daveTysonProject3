@@ -19,7 +19,7 @@ const DrawCard = (props) => {
     const [ card2Array, setCard2Array ] = useState([]);
     const [ userScore, setUserScore ] = useState(0);
     const [ compScore, setCompScore ] = useState(0);
-    const [ streak, setStreak ] = useState(0);
+
     const [ error, setError ] = useState(false);
 
     // This is a function set a winning streak counter, but I'm not sure it's necessary, so commenting it out for now
@@ -30,14 +30,6 @@ const DrawCard = (props) => {
     //         setStreak(0);
     //     }
     // };
-
-    // useEffect(() => {
-    //     if (streak >= 3) {
-
-    //     } else {
-    //     }
-
-    // }, [streak]);
 
     const { drawCount } = props;
 
@@ -150,8 +142,6 @@ const DrawCard = (props) => {
                             compScore={compScore}
                             setUserScore={setUserScore} 
                             setCompScore={setCompScore}
-                            streak={streak}
-                            setStreak={setStreak} 
                         />
                         <button onClick={props.drawCountHandler}>Draw cards</button>
                         <h3>Scores</h3>

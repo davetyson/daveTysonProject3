@@ -185,22 +185,34 @@ footer p {
   padding: 10px 8px;
 }
 
-/* Error message styles */
-.showError {
+/* Error & streak message styles */
+.showError,
+.streakDisplay {
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
   top: 90px;
-  left: 48.5%;
   margin-left: -10%;
   z-index: 20;
   height: fit-content;
-  width: 20%;
   padding: 10px 20px;
-  background-color: rgba(212, 0, 1, 0.8);
   color: #000;
   transition: 1s;
+}
+
+.streakDisplay {
+  display: inline-block;
+  background-color: rgba(54, 240, 44, 0.8);
+  font-size: 2rem;
+  width: 40%;
+  left: 38.5%;
+}
+
+.showError {
+  background-color: rgba(212, 0, 1, 0.8);
+  width: 20%;
+  left: 48.5%;
 }
 
 .showError p {
@@ -236,6 +248,10 @@ footer p {
   animation: tossCardR 0.3s linear 1;
 }
 
+.streakDisplay {
+  animation: streakDisplay 0.5s linear 1;
+}
+
 @keyframes fadeMsg {
   0% {
     opacity: 0%
@@ -264,6 +280,23 @@ footer p {
   100% {
     opacity: 100%;
     transform: rotate(0deg) translateY(0);
+  }
+}
+
+@keyframes streakDisplay {
+  0% {
+    opacity: 0%;
+    transform: scale(0.5); 
+  }
+  33% {
+    opacity: 100%;
+    transform: scale(1.5); 
+  }
+  66% {
+    transform: scale(0.5); 
+  }
+  100% {
+    transform: scale(1); 
   }
 }
 
