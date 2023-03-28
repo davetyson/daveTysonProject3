@@ -24,7 +24,7 @@ const GameOver = (props) => {
             { winLoss === "loss" ?
                 <div className="gameOver">
                     <h2>You have lost the game!</h2>
-                    <p>You tried your best, but Cardbot beat you this time!</p>
+                    <p>You tried your best, but Cardbot beat you!</p>
                     <p>Would you like the play again?</p>
                     <button onClick={refreshPage}>Click to play again</button>
                 </div> :
