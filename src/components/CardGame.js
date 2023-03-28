@@ -38,6 +38,8 @@ const CardGame = () => {
             }).then((apiData) => {
                 pullNewDeck(apiData.data.deck_id);
             })
+            
+            // Error handling if axios call errors out
             .catch(function (error) {
                 if (error.response) {
                   // The request was made and the server responded with a status code that falls out of the range of 2xx
@@ -62,6 +64,8 @@ const CardGame = () => {
             }).then((apiData) => {
                 pullNewDeck(apiData.data.deck_id);
             })
+
+            // Error handling if axios call errors out
             .catch(function (error) {
                 if (error.response) {
                   // The request was made and the server responded with a status code that falls out of the range of 2xx

@@ -53,6 +53,12 @@ button {
   display: inline-block;
   margin: 20px auto 10px auto;
   width: 200px;
+  transition: 0.1s;
+}
+
+button:hover {
+  color: #FED267;
+  background-color: #000;
 }
 
 h1 {
@@ -129,7 +135,6 @@ h3 {
   padding: 10px;
 }
 
-.streak,
 .scorebox {
   display: flex;
   justify-content: center;
@@ -140,7 +145,6 @@ h3 {
   margin: 10px auto;
 }
 
-.streak p,
 .scorebox p {
   font-family: 'Roboto', sans-serif;
   display: inline-block;
@@ -159,6 +163,16 @@ h3 {
   font-weight: 700;
   text-shadow: none;
   height: fit-content;
+}
+
+/* Game Modes styles */
+.gameModes {
+  display: flex;
+  justify-content: space-between;
+}
+
+.gameModes div {
+  width: 30%;
 }
 
 /* Instructions & footer styles */
@@ -185,6 +199,47 @@ footer p {
   padding: 10px 8px;
 }
 
+/* Game Over message styles */
+.gameOverContain {
+  background-color: rgb(255, 255, 255, 0.7);
+  height: 100vh;
+  width: 100%;
+  display: none;
+  opacity: 0;
+  align-items: center;
+  z-index: 30;
+  position: fixed;
+  transition: 1s;
+}
+
+.gameOver {
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 45%;
+  left: 26.5%;
+  margin-top: -10%;
+  margin-left: -10%;
+  z-index: 20;
+  height: fit-content;
+  width: 60%;
+  padding: 30px 20px;
+  color: #000;
+  background-color: #FED267;
+  border: 20px solid black;
+  border-radius: 30px;
+  transition: 1s;
+  text-shadow: none;
+}
+
+.gameOver p {
+  margin: 10px 0;
+}
+
+.gameOver button {
+  margin-top: 10px
+}
+
 /* Error & streak message styles */
 .showError,
 .streakDisplay {
@@ -207,6 +262,7 @@ footer p {
   font-size: 2rem;
   width: 40%;
   left: 38.5%;
+  white-space: nowrap;
 }
 
 .showError {
@@ -328,12 +384,26 @@ footer p {
   .msgCenter {
     min-height: 60px;
   }
+
+  .gameModes div {
+    width: 5%;
+  }
+
+  .gameOver {
+    left: 22.5%;
+  }
 }
 
 @media only screen and (max-width: 768px) {
   figure {
     height: 157px;
     width: 113px;
+  }
+
+  .streakDisplay {
+    white-space: wrap;
+    font-size: 1.5rem;
+    top: 120px;
   }
 
   .showError {
@@ -344,4 +414,5 @@ footer p {
   .showError button {
     margin-left: 0;
   }
+
 }

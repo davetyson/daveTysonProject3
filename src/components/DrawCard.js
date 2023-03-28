@@ -7,6 +7,7 @@ import axios from "axios";
 // Import child components
 import CardDisplay from "./CardDisplay";
 import ComputerMsg from "./ComputerMsg";
+import GameOver from "./GameOver";
 import Error from "./Error";
 
 // Build component
@@ -19,73 +20,120 @@ const DrawCard = (props) => {
     const [ card2Array, setCard2Array ] = useState([]);
     const [ userScore, setUserScore ] = useState(0);
     const [ compScore, setCompScore ] = useState(0);
-
+    const [ ace, setAce ] = useState(14);
+    const [ gameMode, setGameMode ] = useState("infinite");
+    const [ endGame, setEndGame ] = useState(false);
+    const [ winLoss, setWinLoss ] = useState("");
     const [ error, setError ] = useState(false);
 
-    // This is a function set a winning streak counter, but I'm not sure it's necessary, so commenting it out for now
-    // const handleStreak = (newArrayValue1, newArrayValue2) => {
-    //     if (newArrayValue1 > newArrayValue2) {
-    //         setStreak(streak + 1);
-    //     } else {
-    //         setStreak(0);
-    //     }
-    // };
-
+    // Deconstruct some props
     const { drawCount } = props;
+
+    // Declare a function to set the ace value to low or high
+    const aceChange = () => {
+        if (ace === 14) {
+            setAce(1);
+        } else {
+            setAce(14);
+        }
+    };
+
+    // Declare a function to switch the game mode
+    const changeGameMode = () => {
+        if (gameMode === "infinite") {
+            setGameMode("21");
+            setUserScore(0)
+            setCompScore(0)
+        } else {
+            setGameMode("infinite");
+        }
+    };
+
+    // Declare a function to check the scores when playing first to 21, and determine a winner if needed
+    const scoreCheck = (score1, score2) => {
+        if (gameMode === "21") {
+            if (score1 >= 20) {
+                setWinLoss("win")
+                setEndGame(true);
+            } else if (score2 >= 20) {
+                setWinLoss("loss")
+                setEndGame(true);
+            }
+        } else {
+        }
+    };
+
+    // useEffect to check for the end of the game and help display the end of game window if needed
+    useEffect(() => {
+        if (winLoss === "win" || winLoss === "loss") {
+            setEndGame(true);
+        } else {
+        }
+    }, [winLoss])
 
     // useEffect to draw 2 new cards every time the button is clicked (technically it's activated when the state that is changed by the button click changes). The raw card data is sorted into the data I need with the functions I declared above
     useEffect( () => {
 
-    const { deckId } = props;
+        // Deconstruct some props
+        const { deckId } = props;
 
-    // Set the current deck URL to pull cards from
-    const deckUrl = `https://deckofcardsapi.com/api/deck/${deckId}/draw/`;
+        // Set the current deck URL to pull cards from
+        const deckUrl = `https://deckofcardsapi.com/api/deck/${deckId}/draw/`;
 
-    // Declare 2 functions (rawDataConverter 1 & 2) to handle the API data coming in from the card pull and sort it into the Arrays and Objects I need to properly compare the values and determine a winner
-    const rawDataConverter1 = (dataArray, dataValue) => {
-        const newCardArray = Object.entries(dataArray);
-        if (dataValue <= 9) {
-            newCardArray.push(dataValue);
-        } else if (dataValue === "10" ) {
-            newCardArray.push(10);
-        } else if (dataValue === "JACK") {
-            newCardArray.push(11);
-        } else if (dataValue === "QUEEN") {
-            newCardArray.push(12);
-        } else if (dataValue === "KING") {
-            newCardArray.push(13);
-        } else if (dataValue === "ACE") {
-            newCardArray.push(14);
-        } else {
-            alert("There was an error while checking card values");
-        }
-        setCard1Array(newCardArray);
-    };
+        // Declare 2 functions (rawDataConverter 1 & 2) to handle the API data coming in from the card pull and sort it into the Arrays and Objects I need to properly compare the values and determine a winner
+        const rawDataConverter1 = (dataArray, dataValue) => {
+            const newCardArray = Object.entries(dataArray);
+            if (dataValue <= 9) {
+                newCardArray.push(dataValue);
+            } else if (dataValue === "10" ) {
+                newCardArray.push(10);
+            } else if (dataValue === "JACK") {
+                newCardArray.push(11);
+            } else if (dataValue === "QUEEN") {
+                newCardArray.push(12);
+            } else if (dataValue === "KING") {
+                newCardArray.push(13);
+            } else if (dataValue === "ACE") {
+                if (ace === 14) {
+                    newCardArray.push(14);
+                } else {
+                    newCardArray.push(1);
+                }
+            } else {
+                alert("There was an error while checking card values");
+            }
+            setCard1Array(newCardArray);
+        };
 
-    const rawDataConverter2 = (dataArray, dataValue) => {
-        const newCardArray = Object.entries(dataArray);
-        if (dataValue <= 9) {
-            newCardArray.push(dataValue);
-        } else if (dataValue === "10" ) {
-            newCardArray.push(10);
-        } else if (dataValue === "JACK") {
-            newCardArray.push(11);
-        } else if (dataValue === "QUEEN") {
-            newCardArray.push(12);
-        } else if (dataValue === "KING") {
-            newCardArray.push(13);
-        } else if (dataValue === "ACE") {
-            newCardArray.push(14);
-        } else {
-            alert("There was an error while checking card values");
-        }
+        const rawDataConverter2 = (dataArray, dataValue) => {
+            const newCardArray = Object.entries(dataArray);
+            if (dataValue <= 9) {
+                newCardArray.push(dataValue);
+            } else if (dataValue === "10" ) {
+                newCardArray.push(10);
+            } else if (dataValue === "JACK") {
+                newCardArray.push(11);
+            } else if (dataValue === "QUEEN") {
+                newCardArray.push(12);
+            } else if (dataValue === "KING") {
+                newCardArray.push(13);
+            } else if (dataValue === "ACE") {
+                if (ace === 14) {
+                    newCardArray.push(14);
+                } else {
+                    newCardArray.push(1);
+                }
+            } else {
+                alert("There was an error while checking card values");
+            }
 
-        // Extra line in this one so I can determine which card needs the right card animation later
-        newCardArray.push('card2');
+            // Extra line in this one so I can determine which card needs the right card animation later
+            newCardArray.push('card2');
 
-        setCard2Array(newCardArray);
-    };
+            setCard2Array(newCardArray);
+        };
 
+        // Axios logic to keep pulling a pair of cards every time the user clicks to draw cards
         if (drawCount < 2) {
         } else {
             axios ({
@@ -99,27 +147,36 @@ const DrawCard = (props) => {
                 rawDataConverter1(bothCardsRaw.data.cards[0], bothCardsRaw.data.cards[0].value);
                 rawDataConverter2(bothCardsRaw.data.cards[1], bothCardsRaw.data.cards[1].value);
             })
+
+            // Error handling if axios call errors out
             .catch(function (error) {
                 if (error.response) {
-                  // The request was made and the server responded with a status code that falls out of the range of 2xx
-                  console.log(error.response.status);
-                  setError(true);
+                // The request was made and the server responded with a status code that falls out of the range of 2xx
+                console.log(error.response.status);
+                setError(true);
                 } else if (error.request) {
-                  // The request was made but no response was received
-                  console.log(error.request);
-                  setError(true);
+                // The request was made but no response was received
+                console.log(error.request);
+                setError(true);
                 } else {
-                  // Something happened in setting up the request that triggered an Error
-                  console.log('Error', error.message);
-                  setError(true);
+                // Something happened in setting up the request that triggered an Error
+                console.log('Error', error.message);
+                setError(true);
                 }
-              });
+            });
         }
+        
+        // I don't need to call ace in the dependency array as it will run an infinite loop, so disabling eslint on this useEffect
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [drawCount, props])
 
     return (
 
         <>
+            {/* Game Over message */}
+            { endGame === true ? 
+            <GameOver winLoss={winLoss} />
+            : null }
             {/* Error handling component */}
             { error === true ?
             <Error error={error} setError={setError} /> : null }
@@ -142,6 +199,9 @@ const DrawCard = (props) => {
                             compScore={compScore}
                             setUserScore={setUserScore} 
                             setCompScore={setCompScore}
+                            gameMode={gameMode}
+                            endGame={endGame}
+                            scoreCheck={scoreCheck}
                         />
                         <button onClick={props.drawCountHandler}>Draw cards</button>
                         <h3>Scores</h3>
@@ -158,14 +218,6 @@ const DrawCard = (props) => {
                                     <p>{compScore}</p>
                                 </div>
                             </div>
-                            
-                            {/* Here's the code for the streak function if I want to add that back */}
-                            {/* <div className="streak">
-                                <h4>Your Winning Streak: </h4>
-                                <div className="centerScore">
-                                    <p>{streak}</p>
-                                </div>
-                            </div> */}
                         </div>
                     </div>
 
@@ -176,6 +228,12 @@ const DrawCard = (props) => {
                     </div>
                 </div>
 
+                {/* Game modes block */}
+                 <div className="gameModes">
+                    <button onClick={aceChange}>{ ace === 14 ? `Aces are High` : `Aces are Low` }</button>
+                    <div></div>
+                    <button onClick={changeGameMode}>{ gameMode === "infinite" ? `Infinite Play` : `First to 21` }</button>
+                </div>
             </section>
         </>
     )

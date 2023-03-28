@@ -1,7 +1,3 @@
-// If I use firebase, these are the imports
-// import app from "../firebase"
-// import { getDatabase, ref } from "firebase/database";
-
 // Import React hooks
 import { useState, useEffect } from "react";
 
@@ -17,39 +13,41 @@ const ComputerMsg = (props) => {
     const [ streak, setStreak ] = useState(0);
     const [ streakDisplay, setStreakDisplay ] = useState(false);
 
-    // // If I use firebase, these state values will be for that
-    // const [ winResponses, setWinResponses ] = useState([]);
-    // const [ lossResponses, setLossResponses ] = useState([]);
-    // const [ tieResponses, setTieResponses ] = useState([]);
-
     const { card1, card2 } = props;
 
     // useEffect to determine the win/loss/tie message to display & to set the scores
     useEffect( () => {
 
-        const { setUserScore, setCompScore, userScore, compScore} = props;
+        // Deconstruct some props
+        const { setUserScore, setCompScore, userScore, compScore, gameMode, scoreCheck } = props;
 
         // Set response arrays
         const lossResponses = ["You lose! Cardbot is the victor!", "You lost! Better luck next time!", "I have defeated you!"];
         const winResponses = ["You win! Let's play again!", "I lost! Maybe I'll win next time :( ", "I have been defeated!"];
         const tieResponses = ["It's a tie!", "Looks like a tie, we'd better play again!", "Oh, close one!"];
 
-        // This is part of my firebase experiment to get the values from the database to use in the responses, if I use firebase
-        // const db = getDatabase(app);
-        // const dbRef = ref(db);
-        // get(dbRef, (response) => {
-        //    console.log(response.val());
-        //  });
-
+        // Check the two scores and run the right logic depending on who won and what game mode is selected
         setRunMsgAnimation(true);
         if (card1[5] > card2[5]) {
             let winMsg = Math.floor(Math.random() * winResponses.length);
             setComputerMsg(winResponses[winMsg]);
+            if (gameMode === "21") {
+                if (userScore === 20) {
+                    scoreCheck(userScore, compScore)
+                } else {
+                }
+            }
             setUserScore(userScore + 1);
             setStreak(streak + 1);
         } else if (card1[5] < card2[5]) {
             let lossMsg = Math.floor(Math.random() * lossResponses.length);
             setComputerMsg(lossResponses[lossMsg]);
+            if (gameMode === "21") {
+                if (compScore === 20) {
+                    scoreCheck(userScore, compScore)
+                } else {
+                }
+            }
             setCompScore(compScore + 1);
             setStreak(0);
         } else if (card1[5] === undefined) {
@@ -62,9 +60,11 @@ const ComputerMsg = (props) => {
             setRunMsgAnimation(false);
         }, 300)
         
-         // eslint-disable-next-line react-hooks/exhaustive-deps
+        // I don't need to call props in the dependency array as it will run an infinite loop, so disabling eslint on this useEffect
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [card1, card2])
 
+    // Watch for a streak of 3 or more and show display if so
     useEffect(() => {
         if (streak >= 3) {
             setStreakDisplay(true);
@@ -76,6 +76,7 @@ const ComputerMsg = (props) => {
 
     return (
         <>
+            {/* Show streak display component if the user is on a winning streak */}
             { streakDisplay === true ?
             <StreakDisplay streak={streak} /> :
             null}
