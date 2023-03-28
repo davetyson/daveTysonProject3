@@ -123,7 +123,7 @@ h3 {
   border: 2px solid #FED267;
   border-radius: 30px;
   min-height: 100px;
-  min-width: 150px;
+  min-width: 130px;
   height: 60%;
   margin: 10px 0 auto 0;
   padding: 10px;
@@ -159,7 +159,6 @@ h3 {
   font-weight: 700;
   text-shadow: none;
   height: fit-content;
-  min-width: 300px;
 }
 
 /* Instructions & footer styles */
