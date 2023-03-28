@@ -232,7 +232,7 @@ footer p {
 /* Media queries */
 @media only screen and (max-width: 1024px) {
   html {
-    font-size: 100%;
+    font-size: 80%;
   }
 
   figure {
