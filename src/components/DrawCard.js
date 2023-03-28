@@ -7,6 +7,7 @@ import axios from "axios";
 // Import child components
 import CardDisplay from "./CardDisplay";
 import ComputerMsg from "./ComputerMsg";
+import Error from "./Error";
 
 // Build component
 const DrawCard = (props) => {
@@ -19,6 +20,7 @@ const DrawCard = (props) => {
     const [ userScore, setUserScore ] = useState(0);
     const [ compScore, setCompScore ] = useState(0);
     const [ streak, setStreak ] = useState(0);
+    const [ error, setError ] = useState(false);
 
     // This is a function set a winning streak counter, but I'm not sure it's necessary, so commenting it out for now
     // const handleStreak = (newArrayValue1, newArrayValue2) => {
@@ -28,6 +30,14 @@ const DrawCard = (props) => {
     //         setStreak(0);
     //     }
     // };
+
+    // useEffect(() => {
+    //     if (streak >= 3) {
+
+    //     } else {
+    //     }
+
+    // }, [streak]);
 
     const { drawCount } = props;
 
@@ -78,7 +88,7 @@ const DrawCard = (props) => {
             alert("There was an error while checking card values");
         }
 
-        // Extra line in this one so I can determine which card needs the alt animation later
+        // Extra line in this one so I can determine which card needs the right card animation later
         newCardArray.push('card2');
 
         setCard2Array(newCardArray);
@@ -99,85 +109,85 @@ const DrawCard = (props) => {
             })
             .catch(function (error) {
                 if (error.response) {
-                  // The request was made and the server responded with a status code
-                  // that falls out of the range of 2xx
-                  console.log(error.response.data);
+                  // The request was made and the server responded with a status code that falls out of the range of 2xx
                   console.log(error.response.status);
-                  console.log(error.response.headers);
-                  alert("There has been an error pulling card data. Please check console and contact the site administrator.");
+                  setError(true);
                 } else if (error.request) {
                   // The request was made but no response was received
-                  // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-                  // http.ClientRequest in node.js
                   console.log(error.request);
-                  alert("There has been an error pulling card data. Please check console and contact the site administrator.");
+                  setError(true);
                 } else {
                   // Something happened in setting up the request that triggered an Error
                   console.log('Error', error.message);
-                  alert("There has been an error pulling card data. Please check console and contact the site administrator.");
+                  setError(true);
                 }
-                console.log(error.config);
               });
         }
     }, [drawCount, props])
 
     return (
-        // The main gameplay area
-        <section className="gameArea">
-            <div className="cardArea">
 
-                {/* User card block */}
-                <div className="cardBlock">
-                    <h2>Your Card</h2>
-                    <CardDisplay key={"card1"} whichCard={"card1"} photoUrl={card1Object.image} altText={card1Array === undefined ? card1Object.value + " of " + card1Object.suit : "The back of a playing card. Draw a card to start playing!"}/>
-                </div>
+        <>
+            {/* Error handling component */}
+            { error === true ?
+            <Error error={error} setError={setError} /> : null }
+            {/* The main gameplay area */}
+            <section className="gameArea">
+                <div className="cardArea">
 
-                {/* Message block, draw button, scores */}
-                <div className="msgBlock">
-                    <ComputerMsg
-                        card1={card1Array} 
-                        card2={card2Array} 
-                        userScore={userScore} 
-                        compScore={compScore}
-                        setUserScore={setUserScore} 
-                        setCompScore={setCompScore}
-                        streak={streak}
-                        setStreak={setStreak} 
-                    />
-                    <button onClick={props.drawCountHandler}>Draw cards</button>
-                    <h3>Scores</h3>
-                    <div>
-                        <div className="scorebox">
-                            <h4>Your Score: </h4>
-                            <div className="centerScore">
-                                <p>{userScore}</p>
+                    {/* User card block */}
+                    <div className="cardBlock">
+                        <h2>Your Card</h2>
+                        <CardDisplay key={"card1"} whichCard={"card1"} photoUrl={card1Object.image} altText={card1Array === undefined ? card1Object.value + " of " + card1Object.suit : "The back of a playing card. Draw a card to start playing!"}/>
+                    </div>
+
+                    {/* Message block, draw button, scores */}
+                    <div className="msgBlock">
+                        <ComputerMsg
+                            card1={card1Array} 
+                            card2={card2Array} 
+                            userScore={userScore} 
+                            compScore={compScore}
+                            setUserScore={setUserScore} 
+                            setCompScore={setCompScore}
+                            streak={streak}
+                            setStreak={setStreak} 
+                        />
+                        <button onClick={props.drawCountHandler}>Draw cards</button>
+                        <h3>Scores</h3>
+                        <div>
+                            <div className="scorebox">
+                                <h4>Your Score: </h4>
+                                <div className="centerScore">
+                                    <p>{userScore}</p>
+                                </div>
                             </div>
+                            <div className="scorebox">
+                                <h4>Cardbot Score: </h4>
+                                <div className="centerScore">
+                                    <p>{compScore}</p>
+                                </div>
+                            </div>
+                            
+                            {/* Here's the code for the streak function if I want to add that back */}
+                            {/* <div className="streak">
+                                <h4>Your Winning Streak: </h4>
+                                <div className="centerScore">
+                                    <p>{streak}</p>
+                                </div>
+                            </div> */}
                         </div>
-                        <div className="scorebox">
-                            <h4>Cardbot Score: </h4>
-                            <div className="centerScore">
-                                <p>{compScore}</p>
-                            </div>
-                        </div>
-                        
-                        {/* Here's the code for the streak function if I want to add that back */}
-                        {/* <div className="streak">
-                            <h4>Your Winning Streak: </h4>
-                            <div className="centerScore">
-                                <p>{streak}</p>
-                            </div>
-                        </div> */}
+                    </div>
+
+                    {/* Computer card block */}
+                    <div className="cardBlock">
+                        <h2>Cardbot</h2>
+                        <CardDisplay key={"card2"} photoUrl={card2Object.image} altText={card2Array === undefined ? card2Object.value + " of " + card2Object.suit : "The back of a playing card. Draw a card to start playing!"}/>
                     </div>
                 </div>
 
-                {/* Computer card block */}
-                <div className="cardBlock">
-                    <h2>Cardbot</h2>
-                    <CardDisplay key={"card2"} photoUrl={card2Object.image} altText={card2Array === undefined ? card2Object.value + " of " + card2Object.suit : "The back of a playing card. Draw a card to start playing!"}/>
-                </div>
-            </div>
-
-        </section>
+            </section>
+        </>
     )
 }
 

@@ -6,6 +6,7 @@ import axios from 'axios';
 
 // Import child components
 import DrawCard from "./DrawCard";
+import Error from './Error';
 
 // Build component
 const CardGame = () => {
@@ -13,6 +14,7 @@ const CardGame = () => {
     // Set state variables
     const [ deckId, pullNewDeck ] = useState([]);
     const [ drawCount, setDrawCount ] = useState(0);
+    const [ error, setError ] = useState(false);
 
     // Set drawCount advancing function for when button is clicked
     const drawCountHandler = () => {
@@ -38,28 +40,22 @@ const CardGame = () => {
             })
             .catch(function (error) {
                 if (error.response) {
-                  // The request was made and the server responded with a status code
-                  // that falls out of the range of 2xx
-                  console.log(error.response.data);
+                  // The request was made and the server responded with a status code that falls out of the range of 2xx
                   console.log(error.response.status);
-                  console.log(error.response.headers);
-                  alert("There has been an error pulling card data. Please check console and contact the site administrator.");
+                  setError(true);
                 } else if (error.request) {
                   // The request was made but no response was received
-                  // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-                  // http.ClientRequest in node.js
                   console.log(error.request);
-                  alert("There has been an error pulling card data. Please check console and contact the site administrator.");
+                  setError(true);
                 } else {
                   // Something happened in setting up the request that triggered an Error
                   console.log('Error', error.message);
-                  alert("There has been an error pulling card data. Please check console and contact the site administrator.");
+                  setError(true);
                 }
-                console.log(error.config);
               });
         } else if (drawCount >= 26) {
             axios ({
-                url: 'https://deckofcardsapi.com/api/deck/new/shuffle/',
+                url: 'https://deckofcardsapi.com/pi/deck/new/shuffle/',
                 params: {
                     deck_count: 1
                 }
@@ -68,27 +64,27 @@ const CardGame = () => {
             })
             .catch(function (error) {
                 if (error.response) {
-                  // The request was made and the server responded with a status code
-                  // that falls out of the range of 2xx
-                  console.log(error.response.data);
+                  // The request was made and the server responded with a status code that falls out of the range of 2xx
                   console.log(error.response.status);
-                  console.log(error.response.headers);
+                  setError(true);
                 } else if (error.request) {
                   // The request was made but no response was received
-                  // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-                  // http.ClientRequest in node.js
                   console.log(error.request);
+                  setError(true);
                 } else {
                   // Something happened in setting up the request that triggered an Error
                   console.log('Error', error.message);
+                  setError(true);
                 }
-                console.log(error.config);
               });
         }
     }, [drawCount])
 
     return (
-        <>
+        <>  
+            {/* Error handling component */}
+            { error === true ?
+            <Error error={error} setError={setError} /> : null }
             {/* Create an instance of the card generator component and pass deck details down to it as props */}
             <section className="cardGame">
                 <DrawCard deckId={deckId} drawCountHandler={drawCountHandler} drawCount={drawCount}/>
