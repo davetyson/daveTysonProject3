@@ -367,6 +367,11 @@ footer p {
     width: 169.5px;
   }
 
+  button:hover {
+    color: #000;
+    background-color: #FED267;
+  }
+
   .cardArea {
     flex-wrap: wrap;
   }
