@@ -407,6 +407,7 @@ footer p {
 
   .streakDisplay {
     white-space: wrap;
+    width: fit-content;
     font-size: 1.5rem;
     top: 120px;
   }
