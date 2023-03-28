@@ -19,7 +19,7 @@ const ComputerMsg = (props) => {
     useEffect( () => {
 
         // Deconstruct some props
-        const { setUserScore, setCompScore, userScore, compScore, gameMode, scoreCheck } = props;
+        const { setUserScore, setCompScore, userScore, compScore, gameMode, scoreCheck, setEndGame, setWinLoss } = props;
 
         // Set response arrays
         const lossResponses = ["You lose! Cardbot is the victor!", "You lost! Better luck next time!", "I have defeated you!"];
@@ -34,6 +34,9 @@ const ComputerMsg = (props) => {
             if (gameMode === "21") {
                 if (userScore === 20) {
                     scoreCheck(userScore, compScore)
+                } else if (userScore === 20 && compScore === 20) {
+                    setWinLoss("win");
+                    setEndGame(true);
                 } else {
                 }
             }
@@ -45,6 +48,9 @@ const ComputerMsg = (props) => {
             if (gameMode === "21") {
                 if (compScore === 20) {
                     scoreCheck(userScore, compScore)
+                } else if (userScore === 20 && compScore === 20) {
+                    setWinLoss("loss");
+                    setEndGame(true);
                 } else {
                 }
             }

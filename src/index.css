@@ -261,6 +261,7 @@ footer p {
   font-size: 2rem;
   width: 40%;
   margin: 0 auto;
+  margin-left: -10%;
   white-space: nowrap;
 }
 
@@ -398,6 +399,14 @@ footer p {
     width: 5%;
   }
 
+  .streakDisplay {
+    white-space: wrap;
+    width: fit-content;
+    font-size: 1.5rem;
+    top: 120px;
+    margin-left: 0;
+  }
+
   .gameOver {
     left: 20.5%;
   }
@@ -407,13 +416,6 @@ footer p {
   figure {
     height: 157px;
     width: 113px;
-  }
-
-  .streakDisplay {
-    white-space: wrap;
-    width: fit-content;
-    font-size: 1.5rem;
-    top: 120px;
   }
 
   .showError {

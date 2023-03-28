@@ -200,7 +200,8 @@ const DrawCard = (props) => {
                             setUserScore={setUserScore} 
                             setCompScore={setCompScore}
                             gameMode={gameMode}
-                            endGame={endGame}
+                            setEndGame={setEndGame}
+                            setWinLoss={setWinLoss}
                             scoreCheck={scoreCheck}
                         />
                         <button onClick={props.drawCountHandler}>Draw cards</button>
