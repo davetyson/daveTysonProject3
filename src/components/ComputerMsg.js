@@ -96,7 +96,7 @@ const ComputerMsg = (props) => {
             "I need more coffee.",
             "I'm losing my touch.",
             "I knew you had it in you!",
-            "Yeah OK, OK, you win.",
+            "Yeah, OK, OK, you win.",
             "I am bested!",
             "You've gotten better at this",
             "Look at the master of numbers.",
