@@ -45,7 +45,7 @@ const ComputerMsg = (props) => {
             "Does this come with a cash prize?",
             "runVictoryDance(iWin)",
             "That's not a knife, THIS is a knife.",
-            "Winner winner, chicken dinner!",
+            "Winner, winner, chicken dinner!",
             "Victory is mine!",
             "Put another one on the board for Cardbot!",
             "I could do this all day.",
