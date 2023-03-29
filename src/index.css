@@ -403,6 +403,7 @@ footer p {
     white-space: wrap;
     width: fit-content;
     font-size: 1.5rem;
+    position: sticky;
     top: 15vh;
     margin-left: -5%;
   }
@@ -420,7 +421,8 @@ footer p {
 
   .showError {
     flex-direction: column;
-    top: 120px;
+    position: sticky;
+    top: 15vh;
     left: 35.5%;
   }
 
