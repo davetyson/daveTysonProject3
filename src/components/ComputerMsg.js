@@ -44,7 +44,26 @@ const ComputerMsg = (props) => {
             "Cardbot: one; you: zero. Or whatever the actual score is",
             "Does this come with a cash prize?",
             "runVictoryDance(IWin)",
-            "That's not a knife, THIS is a knife."
+            "That's not a knife, THIS is a knife.",
+            "Winner winner, chicken dinner!",
+            "Victory is mine!",
+            "Put another one on the board for Cardbot!",
+            "I could do this all day.",
+            "I'd like to thank the academy...",
+            "I knew I had it in me!",
+            "I'm thinking about going pro, what do you think?",
+            "All I do is play cards!",
+            "Have you seen 'Casino?' Basically, that's about me.",
+            "...and I'll win the next one too!",
+            "I win more rounds than Rocky.",
+            "Don't mess with Cardbot!",
+            "I swear I didn't plan that.",
+            "I'm the vinnare (that's winner in Swedish)!",
+            "Cue my theme song.",
+            "Ceeeeeeelebrate good times, come on!",
+            "It's OK, maybe you're new at this.",
+            "And I didn't even have to phone a friend.",
+            "Next stop, Vegas!"
         ];
 
         const winResponses = [
@@ -69,7 +88,26 @@ const ComputerMsg = (props) => {
             "I'm really not good at this.",
             "You'd think I'd be better at this, being a computer and all.",
             "You think you're so great just because you have a human body. I'll show you!",
-            "Come on, let's play again!"
+            "Come on, let's play again!",
+            "Ouch.",
+            "This is just my hobby, normally I'm a pro frisbee golfer.",
+            "Why would you do this to me? I thought we were friends!",
+            "Do you want to switch cards?",
+            "I need more coffee.",
+            "I'm losing my touch.",
+            "I knew you had it in you!",
+            "Yeah OK, OK, you win.",
+            "I am bested!",
+            "You've gotten better at this",
+            "Look at the master of numbers.",
+            "Teach me your secrets!",
+            "I'm thinking about trying chess.",
+            "I'm writing your name on the list for when AI takes over!",
+            "Double or nothing?",
+            "Let's go again, I've got nothing better to do.",
+            "OK, OK, don't lose your cool Cardbot, you got this.",
+            "One. More. Round.",
+            "Oooooooh I hate losing."
         ];
 
         const tieResponses = [
@@ -83,7 +121,12 @@ const ComputerMsg = (props) => {
             "Are you ready? Let's go again!",
             "I win! Wait... I tied.",
             "No points for either of us.",
-            "Same same!"
+            "Same same!",
+            "Jinx, buy me a Coke!",
+            "What a twist!",
+            "Shuffle 'em again.",
+            "Tie games are boring, let's go again!",
+            "Looks like we're going into overtime."
         ];
 
         // Check the two scores and run the right logic depending on who won and what game mode is selected
@@ -137,7 +180,6 @@ const ComputerMsg = (props) => {
         } else {
             setStreakDisplay(false);
         }
-
     }, [streak]);
 
     return (
