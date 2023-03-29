@@ -16,7 +16,7 @@ const GameOver = (props) => {
                 <div className="gameOver">
                     <h2>Congratulations, you have won the game!</h2>
                     <p>It was close at times, but you stuck it out and defeated Cardbot! Congratulations!</p>
-                    <p>Would you like the play again?</p>
+                    <p>Would you like to play again?</p>
                     <button onClick={refreshPage}>Click to play again</button>
                 </div> :
                 null
@@ -25,7 +25,7 @@ const GameOver = (props) => {
                 <div className="gameOver">
                     <h2>You have lost the game!</h2>
                     <p>You tried your best, but Cardbot beat you!</p>
-                    <p>Would you like the play again?</p>
+                    <p>Would you like to play again?</p>
                     <button onClick={refreshPage}>Click to play again</button>
                 </div> :
                 null 
