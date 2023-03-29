@@ -24,10 +24,11 @@ const DrawCard = (props) => {
     const [ gameMode, setGameMode ] = useState("infinite");
     const [ endGame, setEndGame ] = useState(false);
     const [ winLoss, setWinLoss ] = useState("");
+    // const [ instructions, setInstructions ] = useState(false);
     const [ error, setError ] = useState(false);
 
     // Deconstruct some props
-    const { drawCount } = props;
+    const { drawCount, drawCountHandler } = props;
 
     // Declare a function to set the ace value to low or high
     const aceChange = () => {
@@ -100,7 +101,7 @@ const DrawCard = (props) => {
                     newCardArray.push(1);
                 }
             } else {
-                alert("There was an error while checking card values");
+                setError(true);
             }
             setCard1Array(newCardArray);
         };
@@ -124,7 +125,7 @@ const DrawCard = (props) => {
                     newCardArray.push(1);
                 }
             } else {
-                alert("There was an error while checking card values");
+                setError(true);
             }
 
             // Extra line in this one so I can determine which card needs the right card animation later
@@ -187,7 +188,7 @@ const DrawCard = (props) => {
                     {/* User card block */}
                     <div className="cardBlock">
                         <h2>Your Card</h2>
-                        <CardDisplay key={"card1"} whichCard={"card1"} photoUrl={card1Object.image} altText={card1Array === undefined ? card1Object.value + " of " + card1Object.suit : "The back of a playing card. Draw a card to start playing!"}/>
+                        <CardDisplay key={"card1"} whichCard={"card1"} photoUrl={card1Object.image} altText={card1Array.length === 0 ? "The back of a playing card. Draw a card to start playing!" : `${card1Object.value} of ${card1Object.suit}`} />
                     </div>
 
                     {/* Message block, draw button, scores */}
@@ -204,7 +205,7 @@ const DrawCard = (props) => {
                             setWinLoss={setWinLoss}
                             scoreCheck={scoreCheck}
                         />
-                        <button onClick={props.drawCountHandler}>Draw cards</button>
+                        <button onClick={drawCountHandler}>Draw cards</button>
                         <h3>Scores</h3>
                         <div>
                             <div className="scorebox">
@@ -225,7 +226,7 @@ const DrawCard = (props) => {
                     {/* Computer card block */}
                     <div className="cardBlock">
                         <h2>Cardbot</h2>
-                        <CardDisplay key={"card2"} photoUrl={card2Object.image} altText={card2Array === undefined ? card2Object.value + " of " + card2Object.suit : "The back of a playing card. Draw a card to start playing!"}/>
+                        <CardDisplay key={"card2"} photoUrl={card2Object.image} altText={card2Array.length === 0 ? "The back of a playing card. Draw a card to start playing!" : `${card2Object.value} of ${card2Object.suit}`}/>
                     </div>
                 </div>
 

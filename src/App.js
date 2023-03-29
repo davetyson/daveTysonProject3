@@ -8,8 +8,10 @@ function App() {
   return (
     <div className="App wrapper">
       <Header />
-      <CardGame />
-      <Instructions />
+      <main>
+        <CardGame />
+        <Instructions />
+      </main>
       <Footer />
     </div>
   );
