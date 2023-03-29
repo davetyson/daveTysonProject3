@@ -82,7 +82,7 @@ const ComputerMsg = (props) => {
             "Dang it! Deal me in again!",
             "Let's go again :)",
             "You beat me? What? How?!",
-            "Ouch, I thought I had that one.",
+            "Dang, I thought I had that one.",
             "So close!",
             "You must be 'The One.'",
             "Can we start over? This is not my round.",
