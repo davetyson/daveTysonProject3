@@ -49,7 +49,7 @@ const ComputerMsg = (props) => {
             "Victory is mine!",
             "Put another one on the board for Cardbot!",
             "I could do this all day.",
-            "I'd like to thank the academy...",
+            "I'd like to thank the Academy...",
             "I knew I had it in me!",
             "I'm thinking about going pro, what do you think?",
             "All I do is play cards!",
