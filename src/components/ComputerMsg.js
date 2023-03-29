@@ -43,7 +43,7 @@ const ComputerMsg = (props) => {
             "You can do this!",
             "Cardbot: one; you: zero. Or whatever the actual score is",
             "Does this come with a cash prize?",
-            "runVictoryDance(IWin)",
+            "runVictoryDance(iWin)",
             "That's not a knife, THIS is a knife.",
             "Winner winner, chicken dinner!",
             "Victory is mine!",
