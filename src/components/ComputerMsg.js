@@ -63,7 +63,10 @@ const ComputerMsg = (props) => {
             "Ceeeeeeelebrate good times, come on!",
             "It's OK, maybe you're new at this.",
             "And I didn't even have to phone a friend.",
-            "Next stop, Vegas!"
+            "Next stop, Vegas!",
+            "Ouch (for you).",
+            "I won again!",
+            "I make this look good."
         ];
 
         const winResponses = [
@@ -89,7 +92,7 @@ const ComputerMsg = (props) => {
             "You'd think I'd be better at this, being a computer and all.",
             "You think you're so great just because you have a human body. I'll show you!",
             "Come on, let's play again!",
-            "Ouch.",
+            "Ouch (for me).",
             "This is just my hobby, normally I'm a pro frisbee golfer.",
             "Why would you do this to me? I thought we were friends?",
             "Do you want to switch cards?",
@@ -107,7 +110,10 @@ const ComputerMsg = (props) => {
             "Let's go again, I've got nothing better to do.",
             "OK, OK, don't lose your cool Cardbot, you got this.",
             "One. More. Round.",
-            "Oooooooh I hate losing."
+            "Oooooooh I hate losing.",
+            "I'll be back (to win again).",
+            "Ah, I see what you did there. You chose a better card than me.",
+            "Well, I just lost the house."
         ];
 
         const tieResponses = [
