@@ -22,9 +22,69 @@ const ComputerMsg = (props) => {
         const { setUserScore, setCompScore, userScore, compScore, gameMode, scoreCheck, setEndGame, setWinLoss } = props;
 
         // Set response arrays
-        const lossResponses = ["You lose! Cardbot is the victor!", "You lost! Better luck next time!", "I have defeated you!"];
-        const winResponses = ["You win! Let's play again!", "I lost! Maybe I'll win next time :( ", "I have been defeated!"];
-        const tieResponses = ["It's a tie!", "Looks like a tie, we'd better play again!", "Oh, close one!"];
+        const lossResponses = [
+            "You lose! Cardbot is the victor!", 
+            "You lost!", 
+            "I have defeated you!",
+            "Hahahahaha!",
+            "Imma gonna win!",
+            "You're really not good at this.",
+            "I would try picking a higher card next time.",
+            "Nice try! Let's play again :)",
+            "I'm basically an expert in picking high cards.",
+            "Oh, did I win again? Incredible!",
+            "Mic-drop.",
+            "I bet you'll win next time!",
+            "Looks like I lost... not!",
+            "Hey, we should put money on this next time.",
+            "I WIN :D",
+            "Cardbot's got this in the bag.",
+            "You'll have better luck next time!",
+            "You can do this!",
+            "Cardbot: one; you: zero. Or whatever the actual score is",
+            "Does this come with a cash prize?",
+            "function runVictoryDance()",
+            "That's not a knife, THIS is a knife."
+        ];
+
+        const winResponses = [
+            "You win! Let's play again!",
+            "I lost! Maybe I'll win next time :(",
+            "I have been defeated!",
+            "I'm really tired today.",
+            "You must be card counting.",
+            "Did you peak at my cards?",
+            "Didn't we say that was a practice round?",
+            "I gotta focus!",
+            "This just got serious.",
+            "Dang it! Deal me in again!",
+            "Let's go again :)",
+            "You beat me? What? How?!",
+            "Ouch, I thought I had that one.",
+            "So close!",
+            "You must be 'The One.'",
+            "Can we start over? This is not my round.",
+            "I can't believe I lost!",
+            "I LOST :(",
+            "I'm really not good at this.",
+            "You'd think I'd be better at this, being a computer and all.",
+            "You think you're so great just because you have a human body. I'll show you!",
+            "Come on, let's play again!"
+        ];
+
+        const tieResponses = [
+            "It's a tie!",
+            "Looks like a tie, we'd better play again!",
+            "Oh, close one!",
+            "Even Steven.",
+            "Evenly matched.",
+            "Let's go again my friend!",
+            "If we were playing war, this would be epic. But I'm not smart enough for that game.",
+            "Are you ready? Let's go again!",
+            "I win! Wait... I tied.",
+            "No points for either of us.",
+            "Same same!"
+        ];
 
         // Check the two scores and run the right logic depending on who won and what game mode is selected
         setRunMsgAnimation(true);
