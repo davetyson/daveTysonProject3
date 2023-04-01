@@ -205,7 +205,9 @@ const DrawCard = (props) => {
                             setWinLoss={setWinLoss}
                             scoreCheck={scoreCheck}
                         />
-                        <button onClick={drawCountHandler}>Draw cards</button>
+                        {endGame === true ? 
+                        <button onClick={drawCountHandler} disabled>Draw cards</button> : 
+                        <button onClick={drawCountHandler}>Draw cards</button> }
                         <h3>Scores</h3>
                         <div>
                             <div className="scorebox">
@@ -231,10 +233,14 @@ const DrawCard = (props) => {
                 </div>
 
                 {/* Game modes block */}
-                 <div className="gameModes">
-                    <button onClick={aceChange}>{ ace === 14 ? `Aces are High` : `Aces are Low` }</button>
+                <div className="gameModes">
+                    {endGame === true ? 
+                    <button onClick={aceChange} disabled>{ ace === 14 ? `Aces are High` : `Aces are Low` }</button> : 
+                    <button onClick={aceChange}>{ ace === 14 ? `Aces are High` : `Aces are Low` }</button> }
                     <div></div>
-                    <button onClick={changeGameMode}>{ gameMode === "infinite" ? `Infinite Play` : `First to 21` }</button>
+                    {endGame === true ? 
+                    <button onClick={changeGameMode} disabled>{ gameMode === "infinite" ? `Infinite Play` : `First to 21` }</button> : 
+                    <button onClick={changeGameMode}>{ gameMode === "infinite" ? `Infinite Play` : `First to 21` }</button>}
                 </div>
             </section>
         </>
