@@ -50,20 +50,6 @@ const DrawCard = (props) => {
         }
     };
 
-    // Declare a function to check the scores when playing first to 21, and determine a winner if needed
-    const scoreCheck = (score1, score2) => {
-        if (gameMode === "21") {
-            if (score1 >= 20) {
-                setWinLoss("win")
-                setEndGame(true);
-            } else if (score2 >= 20) {
-                setWinLoss("loss")
-                setEndGame(true);
-            }
-        } else {
-        }
-    };
-
     // useEffect to check for the end of the game and help display the end of game window if needed
     useEffect(() => {
         if (winLoss === "win" || winLoss === "loss") {
@@ -203,7 +189,6 @@ const DrawCard = (props) => {
                             gameMode={gameMode}
                             setEndGame={setEndGame}
                             setWinLoss={setWinLoss}
-                            scoreCheck={scoreCheck}
                         />
                         {endGame === true ? 
                         <button onClick={drawCountHandler} disabled>Draw cards</button> : 
