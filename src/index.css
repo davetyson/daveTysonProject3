@@ -439,3 +439,18 @@ footer p {
   }
 
 }
+
+@media only screen and (max-width: 400px) {
+  button {
+    width: auto;
+  }
+  
+  .cardBlock {
+    width: 100%;
+  }
+
+  .msgCenter {
+    min-width: 0;
+  }
+  
+}
